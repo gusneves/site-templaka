@@ -1,0 +1,99 @@
+.bgMenuIcon:hover,
+.bgMenuIcon:active,
+.closeMenu:hover,
+.closeMenu:active,
+.bgItem:hover,
+.bgItem:active {
+  color: #f96e46;
+  opacity: 0.8;
+}
+
+.bgMenuIcon {
+  color: #e2e8dd;
+  padding: 0;
+  margin: 0;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.shadow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.4;
+  animation: fadeIn 600ms;
+}
+
+.bgMenuOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #3c3c3b;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60vw;
+  height: 100vh;
+  animation: menu 800ms;
+}
+
+.bgItem {
+  position: relative;
+  margin-top: 5px;
+  font-size: 18px;
+  font-family: "Comfortaa", cursive;
+  font-weight: 700;
+  padding: 10px 15px;
+  color: #e2e8dd;
+  transition: 200ms;
+}
+
+.bgItem:hover + .line,
+.bgItem:active + .line {
+  background-color: #e2e8dd;
+}
+
+.line {
+  height: 3px;
+  background-color: #f96e46;
+  width: 30%;
+  min-width: 40px;
+  border-radius: 3px;
+  transition: 500ms;
+}
+
+.closeMenu {
+  color: #e2e8dd;
+  padding: 0;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+@keyframes menu {
+  from {
+    right: -50%;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.4;
+  }
+}

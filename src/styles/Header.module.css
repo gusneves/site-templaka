@@ -1,0 +1,47 @@
+.container {
+  width: 100vw;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  max-height: 60px;
+  background-color: #3c3c3b;
+}
+
+.logo {
+  display: flex;
+  flex: 4;
+  transition: 0.2s;
+}
+
+.logo:active {
+  opacity: 0.5;
+}
+
+.nav {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+}
+.navlink {
+  padding: 5px;
+  margin: 0 5px;
+  font-size: 16px;
+  color: #e2e8dd;
+  font-family: "Comfortaa", cursive;
+  transition: 0.1s;
+}
+.navlink:hover {
+  color: #f96e46;
+}
+
+.navlink:active {
+  opacity: 0.8;
+}
+
+@media (max-width: 460px) {
+  .logo {
+    justify-content: center;
+  }
+}
