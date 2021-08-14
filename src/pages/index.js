@@ -10,20 +10,7 @@ import logo from "../../public/logo.png";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  const [data, setData] = useState({});
-
-  useEffect(async () => {
-    await axios
-      .get("http://templaka.com.br/api")
-      .then((response) => {
-        console.log(response.data);
-        setData(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
-
+  
   return (
     <div className={styles.container} id="container">
       <Head>

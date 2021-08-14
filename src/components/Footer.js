@@ -14,9 +14,11 @@ export default function Footer() {
       <div className={styles.infos}>
         <div className={styles.serviços}>
           <p className={styles.title}>Serviços</p>
-          <p className={styles.sub}>serviço</p>
-          <p className={styles.sub}>serviço</p>
-          <p className={styles.sub}>serviço</p>
+          <p className={styles.sub}>Gravações em baixo relevo</p>
+          <p className={styles.sub}>Placas para túmulos</p>
+          <p className={styles.sub}>Homengens</p>
+          <p className={styles.sub}>Recortes em Router CNC</p>
+          <p className={styles.sub}>Sinalização</p>
         </div>
         <div className={styles.contatos}>
           <p className={styles.title}>Contatos</p>
