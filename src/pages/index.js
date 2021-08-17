@@ -34,6 +34,13 @@ export default function Home() {
             </div>
             <div className={styles.line}></div>
           </div>
+          <div className={styles.servicesGrid}>
+            <div className={styles.services}>Gravações em baixo relevo</div>
+            <div className={styles.services}>Placas para túmulos</div>
+            <div className={styles.services}>Sinalização</div>
+            <div className={styles.servicess}>Recortes em Router CNC</div>
+            <div className={styles.servicess}>Homenagens</div>
+          </div>
         </section>
       </main>
 

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Head from "next/head";
-import Image from "next/image";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -10,12 +11,11 @@ import styles from "../styles/Servicos.module.css";
 export default function Servicos() {
 	const [categories, setCategories] = useState([]);
 	const [paths, setPaths] = useState([]);
-	const [selected, setSelected] = useState(1);
-
-	const myLoader = ({ src }) => {
-		return `https://templaka.com.br/data/${src}`;
-	};
-
+	const [selected, setSelected] = useState('1');
+	const [isOpen, setOpen] = useState(false);
+	const [photoIndex, setPhotoIndex] = useState();
+	const [loaded, setLoaded] = useState(false);
+	
 	async function getCategories() {
 		await axios
 			.get("http://templaka.com.br/api/categories.php")
@@ -34,15 +34,15 @@ export default function Servicos() {
 			.then((response) => {
 				console.log(response.data);
 				setPaths(response.data);
+				setLoaded(true);
 			})
 			.catch((e) => {
 				console.log(e);
 			});
 	}
 	function handleChange(id) {
+		setLoaded(false);
 		setSelected(id);
-    console.log(id);
-    console.log(selected);
 	}
 
 	useEffect(() => {
@@ -74,7 +74,11 @@ export default function Servicos() {
 					{categories.map((value) => (
 						<div
 							key={value.Id}
-							className={styles.category}
+							className={
+								value.Id === selected
+									? styles.categorySelected
+									: styles.category
+							}
 							onClick={() => {
 								handleChange(value.Id);
 							}}
@@ -85,18 +89,51 @@ export default function Servicos() {
 				</div>
 
 				<div className={styles.imgWrapper}>
-					{paths.map((value) => {
-						return (
-							<Image
-								loader={myLoader}
-								src={value.Path}
-								width={120}
-								height={120}
-								key={value.Id}
-							/>
-						);
-					})}
+					{loaded ? (
+						paths.map((value, index) => {
+							return (
+								<img
+									src={`https://templaka.com.br/data/${value.Path}`}
+									key={value.Id}
+									onClick={() => {
+										setPhotoIndex(index);
+										setOpen(true);
+									}}
+									className={styles.img}
+								/>
+							);
+						})
+					) : (
+						<p className={styles.loading}>Carregando...</p>
+					)}
 				</div>
+				{isOpen && (
+					<Lightbox
+						mainSrc={
+							"http://templaka.com.br/data/" +
+							paths[photoIndex].Path
+						}
+						nextSrc={
+							"http://templaka.com.br/data/" +
+							paths[(photoIndex + 1) % paths.length].Path
+						}
+						prevSrc={
+							"http://templaka.com.br/data/" +
+							paths[
+								(photoIndex + paths.length - 1) % paths.length
+							].Path
+						}
+						onCloseRequest={() => setOpen(false)}
+						onMovePrevRequest={() =>
+							setPhotoIndex(
+								(photoIndex + paths.length - 1) % paths.length
+							)
+						}
+						onMoveNextRequest={() =>
+							setPhotoIndex((photoIndex + 1) % paths.length)
+						}
+					/>
+				)}
 			</main>
 
 			<Footer />
