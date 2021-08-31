@@ -3,19 +3,22 @@ import axios from "axios";
 import Head from "next/head";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
+import { useRouter } from "next/dist/client/router";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import styles from "../styles/Servicos.module.css";
 
 export default function Servicos() {
+	const router = useRouter();
+	console.log(router);
 	const [categories, setCategories] = useState([]);
 	const [paths, setPaths] = useState([]);
-	const [selected, setSelected] = useState('1');
+	const [selected, setSelected] = useState("1");
 	const [isOpen, setOpen] = useState(false);
 	const [photoIndex, setPhotoIndex] = useState();
 	const [loaded, setLoaded] = useState(false);
-	
+
 	async function getCategories() {
 		await axios
 			.get("http://templaka.com.br/api/categories.php")
@@ -52,6 +55,13 @@ export default function Servicos() {
 	useEffect(() => {
 		getPaths(selected);
 	}, [selected]);
+
+	useEffect(() => {
+		if (router.isReady && router.query.s != undefined) {
+			const { s } = router.query;
+			handleChange(s.toString());
+		}
+	}, [router]);
 
 	return (
 		<div className={styles.container} id="container">

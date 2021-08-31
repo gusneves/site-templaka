@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Carousel from "react-bootstrap/Carousel";
+import React, { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/dist/client/router";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -13,9 +12,17 @@ import sin from "../../public/sin.jpg";
 import tum from "../../public/tum.jpg";
 import grav from "../../public/grav.jpg";
 import styles from "../styles/Home.module.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Home() {
+	const router = useRouter();
+
+	const handleClick = (n) => {
+		router.push({
+			pathname: "/servicos",
+			query: {s:n},
+		});
+	};
+
 	return (
 		<div className={styles.container} id="container">
 			<Head>
@@ -49,7 +56,10 @@ export default function Home() {
 					</div>
 
 					<div className={styles.flexContainer}>
-						<div className={styles.services}>
+						<div
+							className={styles.services}
+							onClick={() => handleClick(1)}
+						>
 							<Image
 								src={grav}
 								layout={"fill"}
@@ -61,7 +71,10 @@ export default function Home() {
 							</p>
 						</div>
 
-						<div className={styles.services}>
+						<div
+							className={styles.services}
+							onClick={() => handleClick(5)}
+						>
 							<Image
 								src={sin}
 								layout={"fill"}
@@ -71,7 +84,10 @@ export default function Home() {
 							<p className={styles.category}>SINALIZAÇÃO</p>
 						</div>
 
-						<div className={styles.services}>
+						<div
+							className={styles.services}
+							onClick={() => handleClick(2)}
+						>
 							<Image
 								src={tum}
 								layout={"fill"}
@@ -83,7 +99,10 @@ export default function Home() {
 							</p>
 						</div>
 
-						<div className={styles.services}>
+						<div
+							className={styles.services}
+							onClick={() => handleClick(4)}
+						>
 							<Image
 								src={cnc}
 								layout={"fill"}
@@ -95,7 +114,10 @@ export default function Home() {
 							</p>
 						</div>
 
-						<div className={styles.services}>
+						<div
+							className={styles.services}
+							onClick={() => handleClick(3)}
+						>
 							<Image
 								src={grav}
 								layout={"fill"}
