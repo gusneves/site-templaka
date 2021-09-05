@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/dist/client/router";
 import { IMaskInput } from "react-imask";
 
 import Head from "next/head";
@@ -8,6 +9,8 @@ import Footer from "../components/Footer";
 import styles from "../styles/Contato.module.css";
 
 export default function Contato() {
+	const router = useRouter();
+
 	const [estados, setEstados] = useState([]);
 	const [nome, setNome] = useState("");
 	const [email, setEmail] = useState("");
@@ -56,17 +59,46 @@ export default function Contato() {
 		getEstados();
 	}, []);
 
+	useEffect(() => {
+		console.log(router.query);
+		if (router.query.ok == 1) {
+			alert("Mensagem enviada com sucesso!");
+		}
+		if (router.query.ok == 0) {
+			alert(
+				"Erro ao enviar mensagem, por favor, tente novamente mais tarde!"
+			);
+		}
+	}, [router]);
+
 	function handleSubmit(event) {
-		const mail = {
+		const info = {
 			nome,
 			email,
 			telefone,
 			cidade,
 			estado,
 			cep,
-			mensagem,
 		};
-		console.log(mail);
+		const message = { mensagem };
+		console.log({ ...info, ...message });
+		axios
+			.get(
+				`https://templaka.com.br/api/receive_message.php?info=${info}&message=${message}`,
+				{
+					headers: {
+						"Content-Type": "multipart/form-data",
+						"Access-Control-Allow-Origin": "*",
+					},
+				}
+			)
+			.then(() => {
+				alert("Mensagem enviada!");
+			})
+			.catch((e) => {
+				alert(e);
+				console.log(e);
+			});
 		event.preventDefault();
 	}
 
@@ -87,10 +119,17 @@ export default function Contato() {
 				<div className={styles.color}></div>
 
 				<div className={styles.formWrap}>
-					<form onSubmit={handleSubmit} className={styles.form}>
+					<form
+						action={
+							"https://templaka.com.br/api/receive_message.php"
+						}
+						method={"post"}
+						className={styles.form}
+					>
 						<label className={styles.label}>Nome</label>
 						<input
 							value={nome}
+							name="nome"
 							onChange={handleNameChange}
 							type={"text"}
 							required
@@ -101,6 +140,7 @@ export default function Contato() {
 						<label className={styles.label}>E-mail</label>
 						<input
 							value={email}
+							name="email"
 							onChange={handleEmailChange}
 							type={"email"}
 							required
@@ -111,6 +151,7 @@ export default function Contato() {
 						<label className={styles.label}>Telefone</label>
 						<IMaskInput
 							value={telefone}
+							name="telefone"
 							mask={"(00) 00000000[0]"}
 							onAccept={(value) => {
 								handleTelChange(value);
@@ -123,6 +164,7 @@ export default function Contato() {
 						<label className={styles.label}>Cidade</label>
 						<input
 							value={cidade}
+							name="cidade"
 							onChange={handleCidadeChange}
 							type={"text"}
 							required
@@ -135,7 +177,7 @@ export default function Contato() {
 						<select
 							value={estado}
 							onChange={handleEstadoChange}
-							name="estados"
+							name="estado"
 							required
 							className={(styles.input, styles.select)}
 						>
@@ -154,6 +196,7 @@ export default function Contato() {
 						<label className={styles.label}>CEP</label>
 						<IMaskInput
 							value={cep}
+							name="cep"
 							onAccept={(value) => {
 								handleCepChange(value);
 							}}
@@ -166,6 +209,7 @@ export default function Contato() {
 
 						<label className={styles.label}>Mensagem</label>
 						<textarea
+							name="mensagem"
 							value={mensagem}
 							onChange={handleMessageChange}
 							required
