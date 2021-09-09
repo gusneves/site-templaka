@@ -11,6 +11,7 @@ import cnc from "../../public/cnc.jpg";
 import sin from "../../public/sin.jpg";
 import tum from "../../public/tum.jpg";
 import grav from "../../public/grav.jpg";
+import hom from "../../public/hom.jpg";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -119,7 +120,7 @@ export default function Home() {
 							onClick={() => handleClick(3)}
 						>
 							<Image
-								src={grav}
+								src={hom}
 								layout={"fill"}
 								objectFit={"cover"}
 								className={styles.image}

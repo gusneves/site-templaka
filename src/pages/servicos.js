@@ -10,11 +10,12 @@ import Footer from "../components/Footer";
 import styles from "../styles/Servicos.module.css";
 
 export default function Servicos() {
-	const router = useRouter();
-	console.log(router);
+	const { query } = useRouter();
 	const [categories, setCategories] = useState([]);
 	const [paths, setPaths] = useState([]);
-	const [selected, setSelected] = useState("1");
+	const [selected, setSelected] = useState(
+		query.s == undefined ? "1" : query.s.toString()
+	);
 	const [isOpen, setOpen] = useState(false);
 	const [photoIndex, setPhotoIndex] = useState();
 	const [loaded, setLoaded] = useState(false);
@@ -57,11 +58,11 @@ export default function Servicos() {
 	}, [selected]);
 
 	useEffect(() => {
-		if (router.isReady && router.query.s != undefined) {
-			const { s } = router.query;
+		if (query.s != undefined) {
+			const { s } = query;
 			handleChange(s.toString());
 		}
-	}, [router]);
+	}, [query]);
 
 	return (
 		<div className={styles.container} id="container">
