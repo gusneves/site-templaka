@@ -76,7 +76,7 @@
 .imgWrapper {
     display: flex;
     flex: 1;
-    margin: 70px 30px;
+    margin: 50px 30px 100px;
     justify-content: center;
     align-items: center;
     flex-wrap:wrap;
@@ -84,11 +84,15 @@
 }
 
 .img {
+    position: relative;
     margin: 5px;
-    max-height: 200px;
-    max-width: 280px;
-    width: auto;
+    height: 200px;
+    width: 200px;
     cursor: pointer;
+    border-radius: 5px;
+}
+
+.imgconf {
     border-radius: 5px;
 }
 

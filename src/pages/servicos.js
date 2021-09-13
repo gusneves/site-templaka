@@ -4,6 +4,7 @@ import Head from "next/head";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { useRouter } from "next/dist/client/router";
+import Image from "next/image";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -19,6 +20,10 @@ export default function Servicos() {
 	const [isOpen, setOpen] = useState(false);
 	const [photoIndex, setPhotoIndex] = useState();
 	const [loaded, setLoaded] = useState(false);
+
+	const myLoader = ({ src }) => {
+		return `https://templaka.com.br/data/${src}`;
+	};
 
 	async function getCategories() {
 		await axios
@@ -45,7 +50,7 @@ export default function Servicos() {
 			});
 	}
 	function handleChange(id) {
-		if(id != selected){
+		if (id != selected) {
 			setLoaded(false);
 			setSelected(id);
 		}
@@ -105,15 +110,21 @@ export default function Servicos() {
 					{loaded ? (
 						paths.map((value, index) => {
 							return (
-								<img
-									src={`https://templaka.com.br/data/${value.Path}`}
-									key={value.Id}
-									onClick={() => {
-										setPhotoIndex(index);
-										setOpen(true);
-									}}
-									className={styles.img}
-								/>
+								<div className={styles.img}>
+									<Image
+										loader={myLoader}
+										src={value.Path}
+										layout={"fill"}
+										objectFit={"cover"}
+										alt={value.Id.toString()}
+										key={value.Id}
+										onClick={() => {
+											setPhotoIndex(index);
+											setOpen(true);
+										}}
+										className={styles.imgconf}
+									/>
+								</div>
 							);
 						})
 					) : (
