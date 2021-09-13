@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/dist/client/router";
@@ -44,6 +44,7 @@ export default function Home() {
 						width={450}
 						height={72}
 						layout={"intrinsic"}
+						alt="logomarca Templaka"
 					/>
 				</section>
 
@@ -66,6 +67,7 @@ export default function Home() {
 								layout={"fill"}
 								objectFit={"cover"}
 								className={styles.image}
+								alt="Gravações em baixo relevo"
 							/>
 							<p className={styles.category}>
 								GRAVAÇÕES EM BAIXO RELEVO
@@ -81,6 +83,7 @@ export default function Home() {
 								layout={"fill"}
 								objectFit={"cover"}
 								className={styles.image}
+								alt="Sinalização"
 							/>
 							<p className={styles.category}>SINALIZAÇÃO</p>
 						</div>
@@ -94,6 +97,7 @@ export default function Home() {
 								layout={"fill"}
 								objectFit={"cover"}
 								className={styles.image}
+								alt="Placas para túmulos"
 							/>
 							<p className={styles.category}>
 								PLACAS PARA TÚMULOS
@@ -109,6 +113,7 @@ export default function Home() {
 								layout={"fill"}
 								objectFit={"cover"}
 								className={styles.image}
+								alt="Recortes em router CNC"
 							/>
 							<p className={styles.category}>
 								RECORTES EM ROUTER CNC
@@ -124,6 +129,7 @@ export default function Home() {
 								layout={"fill"}
 								objectFit={"cover"}
 								className={styles.image}
+								alt="Homenagens"
 							/>
 							<p className={styles.category}>HOMENAGENS</p>
 						</div>

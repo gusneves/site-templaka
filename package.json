@@ -17,8 +17,7 @@
     "react-headroom": "^3.1.1",
     "react-icons": "^4.2.0",
     "react-image-lightbox": "^5.1.4",
-    "react-imask": "^6.1.0",
-    "react-input-mask": "^3.0.0-alpha.2"
+    "react-imask": "^6.1.0"
   },
   "devDependencies": {
     "eslint": "7.31.0",
