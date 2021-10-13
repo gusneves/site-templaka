@@ -58,18 +58,6 @@ export default function Contato() {
 	useEffect(() => {
 		getEstados();
 	}, []);
-
-	useEffect(() => {
-		console.log(router.query);
-		if (router.query.ok == 1) {
-			alert("Mensagem enviada com sucesso!");
-		}
-		if (router.query.ok == 0) {
-			alert(
-				"Erro ao enviar mensagem, por favor, tente novamente mais tarde!"
-			);
-		}
-	}, [router]);
 	
 	return (
 		<div className={styles.container} id="container">

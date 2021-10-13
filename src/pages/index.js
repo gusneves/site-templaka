@@ -5,22 +5,19 @@ import { useRouter } from "next/dist/client/router";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
-import logo from "../../public/logo.png";
-import cnc from "../../public/cnc.jpg";
-import sin from "../../public/sin.jpg";
-import tum from "../../public/tum.jpg";
-import grav from "../../public/grav.jpg";
-import hom from "../../public/hom.jpg";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
 	const router = useRouter();
 
+	const myLoader = ({ src }) => {
+		return `https://templaka.com.br/data/${src}`;
+	};
+
 	const handleClick = (n) => {
 		router.push({
 			pathname: "/servicos",
-			query: {s:n},
+			query: { s: n },
 		});
 	};
 
@@ -40,7 +37,8 @@ export default function Home() {
 			<main className={styles.main} id="main">
 				<section className={styles.banner} id="section">
 					<Image
-						src={logo}
+						loader={myLoader}
+						src={"logo.png"}
 						width={450}
 						height={72}
 						layout={"intrinsic"}
@@ -63,7 +61,8 @@ export default function Home() {
 							onClick={() => handleClick(1)}
 						>
 							<Image
-								src={grav}
+								loader={myLoader}
+								src={"grav.jpg"}
 								layout={"fill"}
 								objectFit={"cover"}
 								className={styles.image}
@@ -79,7 +78,8 @@ export default function Home() {
 							onClick={() => handleClick(5)}
 						>
 							<Image
-								src={sin}
+								loader={myLoader}
+								src={"sin.jpg"}
 								layout={"fill"}
 								objectFit={"cover"}
 								className={styles.image}
@@ -93,7 +93,8 @@ export default function Home() {
 							onClick={() => handleClick(2)}
 						>
 							<Image
-								src={tum}
+								loader={myLoader}
+								src={"tum.jpg"}
 								layout={"fill"}
 								objectFit={"cover"}
 								className={styles.image}
@@ -109,7 +110,8 @@ export default function Home() {
 							onClick={() => handleClick(4)}
 						>
 							<Image
-								src={cnc}
+								loader={myLoader}
+								src={"cnc.jpg"}
 								layout={"fill"}
 								objectFit={"cover"}
 								className={styles.image}
@@ -125,7 +127,8 @@ export default function Home() {
 							onClick={() => handleClick(3)}
 						>
 							<Image
-								src={hom}
+								loader={myLoader}
+								src={"hom.jpg"}
 								layout={"fill"}
 								objectFit={"cover"}
 								className={styles.image}

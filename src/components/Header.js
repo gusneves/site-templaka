@@ -4,7 +4,6 @@ import Link from "next/link";
 import Headroom from "react-headroom";
 import Sidebar from "./Sidebar";
 import styles from "../styles/Header.module.css";
-import logo from "../../public/logo.png";
 
 function useWindowSize() {
 	const [windowSize, setWindowSize] = useState({
@@ -30,6 +29,10 @@ function useWindowSize() {
 
 export default function Header() {
 	const { width } = useWindowSize();
+
+	const myLoader = ({ src }) => {
+		return `https://templaka.com.br/data/${src}`;
+	};
 	return (
 		<Headroom>
 			<div className={styles.container}>
@@ -37,7 +40,8 @@ export default function Header() {
 					<Link href="/">
 						<a>
 							<Image
-								src={logo}
+								loader={myLoader}
+								src={`logo.png`}
 								width={180}
 								height={29}
 								layout={"fixed"}

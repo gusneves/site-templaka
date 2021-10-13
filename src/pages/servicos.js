@@ -27,7 +27,7 @@ export default function Servicos() {
 
 	async function getCategories() {
 		await axios
-			.get("http://templaka.com.br/api/categories.php")
+			.get("https://templaka.com.br/api/categories.php")
 			.then((response) => {
 				console.log(response.data);
 				setCategories(response.data);
@@ -39,7 +39,7 @@ export default function Servicos() {
 
 	async function getPaths(id = 1) {
 		await axios
-			.get(`http://templaka.com.br/api/paths.php?id=${id}`)
+			.get(`https://templaka.com.br/api/paths.php?id=${id}`)
 			.then((response) => {
 				console.log(response.data);
 				setPaths(response.data);
@@ -89,9 +89,9 @@ export default function Servicos() {
 					<p className={styles.title}>NOSSOS SERVIÇOS</p>
 				</div>
 				<div className={styles.catWrapper}>
-					{categories.map((value) => (
+					{categories.map((value, index) => (
 						<div
-							key={value.Id}
+							key={index}
 							className={
 								value.Id === selected
 									? styles.categorySelected
@@ -110,14 +110,14 @@ export default function Servicos() {
 					{loaded ? (
 						paths.map((value, index) => {
 							return (
-								<div className={styles.img}>
+								<div key={index} className={styles.img}>
 									<Image
 										loader={myLoader}
+										key={index}
 										src={value.Path}
 										layout={"fill"}
 										objectFit={"cover"}
 										alt={value.Id.toString()}
-										key={value.Id}
 										onClick={() => {
 											setPhotoIndex(index);
 											setOpen(true);
@@ -134,15 +134,15 @@ export default function Servicos() {
 				{isOpen && (
 					<Lightbox
 						mainSrc={
-							"http://templaka.com.br/data/" +
+							"https://templaka.com.br/data/" +
 							paths[photoIndex].Path
 						}
 						nextSrc={
-							"http://templaka.com.br/data/" +
+							"https://templaka.com.br/data/" +
 							paths[(photoIndex + 1) % paths.length].Path
 						}
 						prevSrc={
-							"http://templaka.com.br/data/" +
+							"https://templaka.com.br/data/" +
 							paths[
 								(photoIndex + paths.length - 1) % paths.length
 							].Path
